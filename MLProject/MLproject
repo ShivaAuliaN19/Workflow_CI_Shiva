@@ -1,5 +1,8 @@
 name: sentiment-tuning-project
 
+docker_env:
+  image: python:3.10-slim
+
 entry_points:
   main:
     parameters:
