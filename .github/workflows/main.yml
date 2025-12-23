@@ -25,5 +25,6 @@ jobs:
 
       - name: Run training
         run: |
-          python MLProject/modelling_tuning.py \
-            --csv_path MLProject/Hasil_Preprocessing_dan_Labelling.csv
+          cd MLProject
+          mlflow run . -P csv_path=Hasil_Preprocessing_dan_Labelling.csv
+
