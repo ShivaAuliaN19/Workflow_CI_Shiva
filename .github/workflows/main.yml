@@ -1,4 +1,4 @@
-name: ML CI Pipeline
+name: ML CI Pipeline (Docker + MLflow)
 
 on:
   push:
@@ -13,18 +13,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install dependencies
+      - name: Build Docker image
         run: |
-          python -m pip install --upgrade pip
-          pip install -r MLProject/requirements.txt
+          docker build -t mlflow-project .
 
-      - name: Run training
+      - name: Run MLflow Project in Docker
         run: |
-          cd MLProject
-          mlflow run . -P csv_path=Hasil_Preprocessing_dan_Labelling.csv
-
+          docker run --rm mlflow-project \
+            run . -P csv_path=Hasil_Preprocessing_dan_Labelling.csv
